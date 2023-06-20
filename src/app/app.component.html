@@ -1,0 +1,48 @@
+<p-fileUpload
+  name="File"
+  mode="advanced"
+  #fileUpload
+  customUpload="true"
+  *ngIf="!progress"
+  [accept]="'application/pdf'"
+  (onBeforeUpload)="onBeforeUpload()"
+  [files]="uploadMoodelFiles"
+  (onError)="onError($event)"
+  [showUploadButton]="false"
+  (onClear)="onClear($event)"
+  cancelButtonTitle="Cancel file"
+  uploadHandler="uploadHandler($event)"
+>
+  <ng-template let-file pTemplate="file">
+    <div>Custom UI to display a file</div>
+    {{ file }}
+  </ng-template>
+  <ng-template pTemplate="content" let-files> fff</ng-template></p-fileUpload
+>
+
+<button (click)="storeFiles()">Store files and clear file upload</button>
+
+<button (click)="assignFiles()">Assign</button>
+
+<div class="card flex justify-content-center">
+  <p-toast></p-toast>
+  <p-fileUpload
+    url="https://www.primefaces.org/cdn/api/upload.php"
+    name="demo[]"
+    (onUpload)="onUpload($event)"
+    (onError)="test($event)"
+    [multiple]="false"
+    [accept]="'application/pdf'"
+    maxFileSize="1000000"
+  >
+    <ng-template let-file pTemplate="file">
+      <div>Custom UI to display a file</div>
+      {{ file }}
+    </ng-template>
+    <ng-template pTemplate="content" let-files>
+      <div *ngIf="uploadedFiles.length">
+        {{ uploadedFiles[0].name }} - {{ uploadedFiles[0].size }} bytes
+      </div>
+    </ng-template>
+  </p-fileUpload>
+</div>
